@@ -10,7 +10,6 @@ import java.time.Duration;
 public class Browser {
     private static int DEFAULT_WAIT_IN_SECONDS = 10;
     private static WebDriver webDriver;
-    //private Browser(){}
 
     public static WebDriver getWebDriver(){
         if(webDriver == null) {
