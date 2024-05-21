@@ -8,12 +8,12 @@ public class Apple extends Food{
 
     private String colour;
 
-    public Apple(int amount, int price, String colour){
-        this.amount = amount;
-        this.price = price;
+    public Apple(int amount, int price, String colour) {
+        super(amount, price);
         this.colour = colour;
-        this.isVegetarian = true;
+        isVegetarian = true;
     }
+
 
     @Override
     public int getAmount(){

@@ -7,7 +7,6 @@ public class ShoppingCart {
 
     private Food[] foodArray;
 
-
     public ShoppingCart(Food[] foodArray){
         this.foodArray = foodArray;
     }
@@ -27,7 +26,7 @@ public class ShoppingCart {
         for (Food food : foodArray){
             int discount = food.getDiscount();
             if(food.getDiscount() != 0){
-                result += (food.getPrice() * food.getAmount()) / 100 * discount;
+                result += getSumPriceWithoutDiscount() + ((food.getPrice() * food.getAmount()) / 100 * discount);
             }
         }
         return result;

@@ -3,11 +3,9 @@ package by.intexsoft.model;
 
 public class Meat extends Food{
 
-
-    public Meat(int amount, int price){
-        this.amount = amount;
-        this.price = price;
-        this.isVegetarian = false;
+    public Meat(int amount, int price) {
+        super(amount, price);
+        isVegetarian = false;
     }
 
     @Override
