@@ -10,7 +10,6 @@ import java.time.Duration;
 public class Browser {
     private static int DEFAULT_WAIT_IN_SECONDS = 10;
     private static WebDriver webDriver;
-    //private Browser(){}
 
     public static WebDriver getWebDriver(){
         if(webDriver == null) {
@@ -21,7 +20,7 @@ public class Browser {
 
     public static void init(){
         webDriver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver","/Users/Nastya/tools/chromedriver-mac-x64");
+        System.setProperty("webdriver.chrome.driver","");
         webDriver.get(Urls.BASE_URL.getTitle());
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(DEFAULT_WAIT_IN_SECONDS));
         webDriver.manage().window().maximize();
