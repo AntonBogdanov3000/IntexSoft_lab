@@ -30,23 +30,23 @@ public class AnimalFarm {
 
     public Map<Animal, Integer> countedAnimals(){
         Map<Animal, Integer> animalMap = new HashMap<>();
-        Animal name = null;
+        Animal animalName = null;
         for(String animal : farmAnimals){
             String[] split = animal.split(" ");
             try {
-                name = Animal.valueOf(split[0]);
+                animalName = Animal.valueOf(split[0]);
             }
             catch (IllegalArgumentException e) {
                 System.out.println("Please correct string [ " + e.getMessage() + " ] Incorrect input data ");
             }
                 Integer countOfAnimal = 1;
-                if (!animalMap.containsKey(name)) {
-                    animalMap.put(Animal.valueOf(split[0]), countOfAnimal);
+                if (!animalMap.containsKey(animalName)) {
+                    animalMap.put(animalName, countOfAnimal);
                 } else {
                     try {
-                        int currentCountOfAnimal = animalMap.get(Animal.valueOf(split[0]));
-                        animalMap.remove(Animal.valueOf(split[0]));
-                        animalMap.put(Animal.valueOf(split[0]), currentCountOfAnimal + 1);
+                        int currentCountOfAnimal = animalMap.get(animalName);
+                        animalMap.remove(animalName);
+                        animalMap.put(animalName, currentCountOfAnimal + 1);
                     }catch (IllegalArgumentException e) {
                         System.out.println("Please correct string [ " + e.getMessage() + " ] Incorrect input data ");
                     }
