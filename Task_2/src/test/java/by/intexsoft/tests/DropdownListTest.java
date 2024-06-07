@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class DropdownListTest extends BaseTest {
 
-    // Проходит на FireFox
-    // Падает на Chrome
 
     @ParameterizedTest
     @CsvFileSource(resources = "/dropdownListTestData.csv")

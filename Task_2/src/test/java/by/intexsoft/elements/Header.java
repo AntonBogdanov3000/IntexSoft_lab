@@ -1,5 +1,6 @@
 package by.intexsoft.elements;
 
+import by.intexsoft.utils.WaitUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,12 +14,12 @@ public class Header {
         this.webDriver = webDriver;
     }
 
-    private static final By ORDER_BUTTON_LOCATOR = By.xpath("//button[contains( text(), 'Заказать')]");
-    private static final By SCOOTER_SIGN_LOCATOR = By.xpath("//a[@class='Header_LogoScooter__3lsAR']");
-    private static final By YANDEX_SIGN_LOCATOR = By.xpath("//a[@class='Header_LogoYandex__3TSOI']");
-    private static final By ORDER_STATUS_BUTTON_LOCATOR = By.xpath("//button[text()='Статус заказа']");
-    private static final By ORDER_ID_INPUT_LOCATOR = By.xpath("//input[@class='Input_Input__1iN_Z Header_Input__xIoUq']");
-    private static final By GO_BUTTON_LOCATOR = By.xpath("//button[@class='Button_Button__ra12g Header_Button__28dPO']");
+    private static final By ORDER_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Header_Nav')]/button[1]");
+    private static final By SCOOTER_SIGN_LOCATOR = By.xpath("//a[contains(@class, 'Header_LogoScooter')]");
+    private static final By YANDEX_SIGN_LOCATOR = By.xpath("//a[contains(@class, 'Header_LogoYandex')]");
+    private static final By ORDER_STATUS_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Header_Nav')]/button[2]");
+    private static final By ORDER_ID_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Input_InputContainer')]/input");
+    private static final By GO_BUTTON_LOCATOR = By.xpath("//div/button[contains(@class, 'Header_Button')]");
 
     public void clickOnOrderButton(){
         WebElement topMenuItem = webDriver.findElement(ORDER_BUTTON_LOCATOR);
@@ -42,6 +43,7 @@ public class Header {
 
     public void inputOrderId(String id){
         WebElement orderIdInput = webDriver.findElement(ORDER_ID_INPUT_LOCATOR);
+        WaitUtil.waitForElementVisibility(orderIdInput,3, webDriver);
         orderIdInput.sendKeys(id);
     }
 

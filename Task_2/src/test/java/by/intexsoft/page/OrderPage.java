@@ -9,21 +9,21 @@ import java.util.List;
 
 public class OrderPage extends BasePage{
 
-    private final static By NAME_INPUT_LOCATOR = By.xpath("//input[@placeholder='* Имя']");
-    private final static By SURNAME_INPUT_LOCATOR = By.xpath("//input[@placeholder='* Фамилия']");
-    private final static By ADDRESS_INPUT_LOCATOR = By.xpath("//input[@placeholder='* Адрес: куда привезти заказ']");
-    private final static By METRO_INPUT_LOCATOR = By.xpath("//input[@placeholder='* Станция метро']");
-    private final static By PHONE_INPUT_LOCATOR = By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер']");
-    private final static By DATE_SELECTOR_LOCATOR = By.xpath("//input[@placeholder='* Когда привезти самокат']");
-    private final static By NEXT_BUTTON_LOCATOR = By.xpath("//button[text()='Далее']");
-    private final static By ACCEPT_COOKIES_BUTTON_LOCATOR = By.xpath("//button[@class='App_CookieButton__3cvqF']");
+    private final static By NAME_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[1]/input");
+    private final static By SURNAME_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[2]/input");
+    private final static By ADDRESS_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[3]/input");
+    private final static By METRO_INPUT_LOCATOR = By.xpath("//input[@class='select-search__input']");
+    private final static By PHONE_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[5]/input");
+    private final static By DATE_SELECTOR_LOCATOR = By.xpath("//div[1]/input[contains(@class, 'Input_Responsible')]");
+    private final static By NEXT_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_NextButton')]/*");
+    private final static By ACCEPT_COOKIES_BUTTON_LOCATOR = By.xpath("//button[contains(@class,'App_CookieButton')]");
     private final static By ORDER_TIME_LOCATOR = By.xpath("//div[@class='Dropdown-control']");
     private final static By ORDER_DROPDOWN_LOCATOR = By.xpath("//div[@class='Dropdown-option']");
-    private final static By CHECKBOXES_COLOR_LOCATOR = By.xpath("//label[@class='Checkbox_Label__3wxSf']");
-    private final static By ORDER_BUTTON_LOCATOR = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
-    private final static By CONFIRM_ORDER_BUTTON_LOCATOR = By.xpath("//button[text()='Да']");
-    private final static By CREATED_ORDER_STATUS_LOCATOR = By.xpath("//div[@class='Order_ModalHeader__3FDaJ']");
-    private final static By METRO_DROPDOWN_LIST_LOCATOR = By.xpath("//div[@class='Order_Text__2broi']");
+    private final static By CHECKBOXES_COLOR_LOCATOR = By.xpath("//label[contains(@class, 'Checkbox_Label')]");
+    private final static By ORDER_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_Buttons')]/button[2]");
+    private final static By CONFIRM_ORDER_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_Modal')]/div[2]/button[2]");
+    private final static By CREATED_ORDER_STATUS_LOCATOR = By.xpath("//div[contains(@class, 'Order_ModalHeader')]");
+    private final static By METRO_DROPDOWN_LIST_LOCATOR = By.xpath("//div[contains(@class, 'Order_Text')]");
 
     public OrderPage(WebDriver webDriver) {
         super(webDriver);
@@ -48,7 +48,6 @@ public class OrderPage extends BasePage{
         WebElement surnameInput = driver.findElement(SURNAME_INPUT_LOCATOR);
         WebElement addressInput = driver.findElement(ADDRESS_INPUT_LOCATOR);
         WebElement metroInput = driver.findElement(METRO_INPUT_LOCATOR);
-
         WebElement phoneInput = driver.findElement(PHONE_INPUT_LOCATOR);
 
         nameInput.sendKeys(name);

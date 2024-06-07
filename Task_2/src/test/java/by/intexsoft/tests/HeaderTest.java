@@ -1,6 +1,6 @@
 package by.intexsoft.tests;
 
-import by.intexsoft.constants.Urls;
+import by.intexsoft.constants.UrlConstants;
 import by.intexsoft.page.MainPage;
 import by.intexsoft.page.OrderPage;
 import org.junit.Test;
@@ -8,9 +8,6 @@ import org.junit.jupiter.api.Assertions;
 
 
 public class HeaderTest extends BaseTest{
-
-    // Проходит на Chrome
-    // Падает на FireFox
 
     @Test
     public void testHeaderLogos(){
@@ -21,6 +18,6 @@ public class HeaderTest extends BaseTest{
         Assertions.assertTrue(mainPage.isOpened(), "Actual result is not equals expected");
         orderPage.header.clickOnYandexLogo();
         browserUtils.switchTab(driver);
-        Assertions.assertTrue(driver.getCurrentUrl().contains(Urls.YANDEX_URL.getTitle()),"Actual result is not equals expected");
+        Assertions.assertTrue(driver.getCurrentUrl().contains(UrlConstants.YANDEX_URL),"Actual result is not equals expected");
     }
 }

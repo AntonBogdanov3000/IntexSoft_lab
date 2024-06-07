@@ -10,7 +10,7 @@ public class OrderStatusPage extends BasePage{
     public OrderStatusPage(WebDriver webDriver) {
         super(webDriver);
     }
-    private static final By WRONG_ORDER_PAGE_LOCATOR = By.xpath("//div[@class='Track_NotFound__6oaoY']");
+    private static final By WRONG_ORDER_PAGE_LOCATOR = By.xpath("//div[contains(@class, 'Track_NotFound')]");
 
     @Override
     public boolean isOpened() {

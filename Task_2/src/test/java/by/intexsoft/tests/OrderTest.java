@@ -1,6 +1,5 @@
 package by.intexsoft.tests;
 
-import by.intexsoft.browser.Browser;
 import by.intexsoft.page.MainPage;
 import by.intexsoft.page.OrderPage;
 import by.intexsoft.page.OrderStatusPage;
@@ -11,15 +10,12 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class OrderTest extends BaseTest {
 
-    // Проходит на FireFox
-    // Падает на Chrome
-
     @ParameterizedTest
     @CsvFileSource(resources = "/orderTestData.csv")
     public void testOrder(String name, String surname, String address, String metro, String phone,
                           int dayOfMonth, String period, String color, String expected) throws InterruptedException {
 
-        OrderPage orderPage = new OrderPage(Browser.getWebDriver());
+        OrderPage orderPage = new OrderPage(driver);
         orderPage.openPage();
         orderPage.acceptCookies();
         orderPage.enterData(name, surname, address, metro, phone);
@@ -31,8 +27,6 @@ public class OrderTest extends BaseTest {
         Assertions.assertTrue(orderPage.getCreatedOrderStatus().contains(expected),"Result is not equals expected");
     }
 
-    // Проходит на FireFox
-    // Проходит на Chrome
 
     @ParameterizedTest
     @CsvFileSource(resources = "/wrongOrderId.csv")
@@ -44,5 +38,4 @@ public class OrderTest extends BaseTest {
         mainPage.header.clickGoButton();
         Assertions.assertTrue(orderStatusPage.isOpened(), "Result is not equals expected");
     }
-
 }

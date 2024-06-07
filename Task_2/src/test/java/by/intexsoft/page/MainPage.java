@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MainPage extends BasePage{
 
-    private final static By MAIN_PAGE_LOCATOR = By.xpath("//div[@class='Home_Header__iJKdX']");
+    private final static By MAIN_PAGE_LOCATOR = By.xpath("//div[contains(@class, 'Home_Header')]");
     private final static By ITEMS_TEXT_LIST_LOCATOR = By.xpath("//div[@class='accordion__heading']");
     private final static By INNER_TEXT_ITEMS_LIST_LOCATOR = By.xpath("//div[@class='accordion__heading']/following::div[@class='accordion__panel']");
     private String innerText;
