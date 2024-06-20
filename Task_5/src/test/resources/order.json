@@ -1,0 +1,14 @@
+{
+  "firstName" : "Kurt",
+  "lastName" : "Cobain",
+  "address" : "Seattle",
+  "metroStation" : "Oktyabrskaya",
+  "phone" : "+3752977255577",
+  "rentTime" : 4,
+  "deliveryDate" : "2024-05-05",
+  "comment" : "Hello world",
+  "color" : [
+    "BLACK",
+    "GREY"
+  ]
+}
