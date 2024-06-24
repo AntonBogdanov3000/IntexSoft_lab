@@ -21,7 +21,6 @@ public class GetOrdersTest extends BaseTest{
     @Test
     public void test_1_GetOrdersList(){
         OrderList orderList = given().get(baseURI + orders).body().as(OrderList.class);
-        System.out.println(orderList.getOrders().length);
         Assert.assertNotNull(orderList);
     }
 
@@ -39,7 +38,7 @@ public class GetOrdersTest extends BaseTest{
     public void test_3_GetOrderWithoutTrack(){
         RequestSpecification request = given();
         Response response = request.queryParam(Params.T, ParamsData.emptyTrack).get(baseURI + ordersTrack);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.LESS_DATA_FOR_SEARCH);
     }
 
@@ -47,7 +46,7 @@ public class GetOrdersTest extends BaseTest{
     public void test_4_GetOrderWithIncorrectTrack(){
         RequestSpecification request = given();
         Response response = request.queryParam(Params.T, ParamsData.incorrectOrderTrack).get(baseURI + ordersTrack);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.ORDER_NOT_FOUND);
     }
 }

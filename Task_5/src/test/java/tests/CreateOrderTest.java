@@ -17,9 +17,8 @@ public class CreateOrderTest extends BaseTest{
     public void testCreateOrder(){
         Response response = given().contentType(ContentType.JSON)
                 .body(FileUtil.getOrderFile()).post(baseURI + orders);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Order.createdOrderTrack = responseJson.getTrack();
-        response.prettyPrint();
         Assert.assertNotEquals(responseJson.getTrack() , 0);
     }
 }

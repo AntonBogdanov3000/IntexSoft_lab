@@ -21,7 +21,7 @@ public class AcceptOrderTest extends BaseTest{
         RequestSpecification request = given();
         Response response = request.queryParam(Params.COURIER_ID, Courier.createdCourierId)
                 .put(baseURI + orderAccept + Order.createdOrderId);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertTrue(responseJson.isOk());
     }
 
@@ -30,7 +30,7 @@ public class AcceptOrderTest extends BaseTest{
         RequestSpecification request = given();
         Response response = request.queryParam(Params.COURIER_ID, ParamsData.incorrectCourierId)
                 .put(baseURI + orderAccept + Order.createdOrderId);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.COURIER_WITH_ID_NOT_EXIST);
     }
 
@@ -38,7 +38,7 @@ public class AcceptOrderTest extends BaseTest{
     public void test_3_acceptOrderWithoutCourierId(){
         RequestSpecification request = given();
         Response response = request.put(baseURI + orderAccept + Order.createdOrderId);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.LESS_DATA_FOR_SEARCH);
     }
 
@@ -47,7 +47,7 @@ public class AcceptOrderTest extends BaseTest{
         RequestSpecification request = given();
         Response response = request.queryParam(Params.COURIER_ID, Courier.createdCourierId)
                 .put(baseURI + orderAccept + ParamsData.incorrectOrderId);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.ORDER_NOT_EXIST);
     }
 
@@ -55,7 +55,7 @@ public class AcceptOrderTest extends BaseTest{
     public void test_5_acceptOrderWithoutOrderId(){
         RequestSpecification request = given();
         Response response = request.put(baseURI + orderAccept + "courier=" + Courier.createdCourierId);
-        ResponseJson responseJson = gson.fromJson(response.body().asPrettyString(), ResponseJson.class);
+        ResponseJson responseJson = response.as(ResponseJson.class);
         Assert.assertEquals(responseJson.getMessage() , Messages.LESS_DATA_FOR_SEARCH);
     }
 }
