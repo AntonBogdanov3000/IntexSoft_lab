@@ -1,115 +1,97 @@
 package by.intexsoft.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import by.intexsoft.page.locators.OrderPageLocators;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import java.util.List;
 
+public class OrderPage extends BasePage {
 
-public class OrderPage extends BasePage{
 
-    private final static By NAME_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[1]/input");
-    private final static By SURNAME_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[2]/input");
-    private final static By ADDRESS_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[3]/input");
-    private final static By METRO_INPUT_LOCATOR = By.xpath("//input[@class='select-search__input']");
-    private final static By PHONE_INPUT_LOCATOR = By.xpath("//div[contains(@class, 'Order_Form')]/div[5]/input");
-    private final static By DATE_SELECTOR_LOCATOR = By.xpath("//div[1]/input[contains(@class, 'Input_Responsible')]");
-    private final static By NEXT_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_NextButton')]/*");
-    private final static By ACCEPT_COOKIES_BUTTON_LOCATOR = By.xpath("//button[contains(@class,'App_CookieButton')]");
-    private final static By ORDER_TIME_LOCATOR = By.xpath("//div[@class='Dropdown-control']");
-    private final static By ORDER_DROPDOWN_LOCATOR = By.xpath("//div[@class='Dropdown-option']");
-    private final static By CHECKBOXES_COLOR_LOCATOR = By.xpath("//label[contains(@class, 'Checkbox_Label')]");
-    private final static By ORDER_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_Buttons')]/button[2]");
-    private final static By CONFIRM_ORDER_BUTTON_LOCATOR = By.xpath("//div[contains(@class, 'Order_Modal')]/div[2]/button[2]");
-    private final static By CREATED_ORDER_STATUS_LOCATOR = By.xpath("//div[contains(@class, 'Order_ModalHeader')]");
-    private final static By METRO_DROPDOWN_LIST_LOCATOR = By.xpath("//div[contains(@class, 'Order_Text')]");
-
-    public OrderPage(WebDriver webDriver) {
-        super(webDriver);
+    public OrderPage(Page page) {
+        super(page);
     }
 
-    @Override
     public boolean isOpened() {
-        return false;
+        Locator orderPage = page.locator(OrderPageLocators.ORDER_PAGE_LOCATOR);
+        return orderPage.isVisible();
     }
 
-    public void openPage(){
+    public void openPage() {
         header.clickOnOrderButton();
     }
 
-    public void acceptCookies(){
-        WebElement acceptCookieButton = driver.findElement(ACCEPT_COOKIES_BUTTON_LOCATOR);
+    public void acceptCookies() {
+        Locator acceptCookieButton = page.locator(OrderPageLocators.ACCEPT_COOKIES_BUTTON_LOCATOR);
         acceptCookieButton.click();
     }
 
-    public void enterData(String name, String surname, String address, String metro, String phone){
-        WebElement nameInput = driver.findElement(NAME_INPUT_LOCATOR);
-        WebElement surnameInput = driver.findElement(SURNAME_INPUT_LOCATOR);
-        WebElement addressInput = driver.findElement(ADDRESS_INPUT_LOCATOR);
-        WebElement metroInput = driver.findElement(METRO_INPUT_LOCATOR);
-        WebElement phoneInput = driver.findElement(PHONE_INPUT_LOCATOR);
+    public void enterData(String name, String surname, String address, String metro, String phone) {
+        Locator nameInput = page.locator(OrderPageLocators.NAME_INPUT_LOCATOR);
+        Locator surnameInput = page.locator(OrderPageLocators.SURNAME_INPUT_LOCATOR);
+        Locator addressInput = page.locator(OrderPageLocators.ADDRESS_INPUT_LOCATOR);
+        Locator metroInput = page.locator(OrderPageLocators.METRO_INPUT_LOCATOR);
+        Locator phoneInput = page.locator(OrderPageLocators.PHONE_INPUT_LOCATOR);
 
-        nameInput.sendKeys(name);
-        surnameInput.sendKeys(surname);
-        addressInput.sendKeys(address);
+        nameInput.fill(name);
+        surnameInput.fill(surname);
+        addressInput.fill(address);
         metroInput.click();
 
-        List<WebElement> metroList = driver.findElements(METRO_DROPDOWN_LIST_LOCATOR);
-        for (WebElement element : metroList){
-            if(element.getText().equals(metro)){
+        List<Locator> metroList = page.locator(OrderPageLocators.METRO_DROPDOWN_LIST_LOCATOR).all();
+        for (Locator element : metroList){
+            if(element.textContent().equals(metro)){
                 element.click();
                 break;
             }
         }
-        phoneInput.sendKeys(phone);
+        phoneInput.fill(phone);
     }
 
-    public void selectDate(int dayOfMonth){
-        WebElement dateInput = driver.findElement(DATE_SELECTOR_LOCATOR);
+    public void selectDate(int dayOfMonth) {
+        Locator dateInput = page.locator(OrderPageLocators.DATE_SELECTOR_LOCATOR);
         dateInput.click();
         String dayOfMonthPattern = String.format("//div[text()=%d]",dayOfMonth);
-        WebElement day = driver.findElement(By.xpath(dayOfMonthPattern));
+        Locator day = page.locator(dayOfMonthPattern);
         day.click();
     }
 
-    public void enterPeriod(String period){
-        WebElement orderTime = driver.findElement(ORDER_TIME_LOCATOR);
+    public void enterPeriod(String period) {
+        Locator orderTime = page.locator(OrderPageLocators.ORDER_TIME_LOCATOR);
         orderTime.click();
-        List<WebElement> dropDown = driver.findElements(ORDER_DROPDOWN_LOCATOR);
-        for(WebElement element : dropDown){
-            if(element.getText().equals(period)){
+        List<Locator> dropDown = page.locator(OrderPageLocators.ORDER_DROPDOWN_LOCATOR).all();
+        for(Locator element : dropDown){
+            if(element.textContent().equals(period)){
                 element.click();
                 break;
             }
         }
     }
 
-    public void selectColor(String color){
-        List<WebElement> colorList = driver.findElements(CHECKBOXES_COLOR_LOCATOR);
-        for(WebElement element : colorList){
-            if(element.getText().equals(color)){
+    public void selectColor(String color) {
+        List<Locator> colorList = page.locator(OrderPageLocators.CHECKBOXES_COLOR_LOCATOR).all();
+        for(Locator element : colorList){
+            if(element.textContent().equals(color)){
                 element.click();
                 break;
             }
         }
     }
 
-    public void completeTheOrder(){
-        WebElement orderButton = driver.findElement(ORDER_BUTTON_LOCATOR);
+    public void completeTheOrder() {
+        Locator orderButton = page.locator(OrderPageLocators.ORDER_BUTTON_LOCATOR);
         orderButton.click();
-        WebElement confirm = driver.findElement(CONFIRM_ORDER_BUTTON_LOCATOR);
+        Locator confirm = page.locator(OrderPageLocators.CONFIRM_ORDER_BUTTON_LOCATOR);
         confirm.click();
     }
 
-    public void clickOnNextButton(){
-        WebElement nextButton = driver.findElement(NEXT_BUTTON_LOCATOR);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", nextButton);
+    public void clickOnNextButton() {
+        Locator nextButton = page.locator(OrderPageLocators.NEXT_BUTTON_LOCATOR);
         nextButton.click();
     }
 
-    public String getCreatedOrderStatus(){
-        WebElement text = driver.findElement(CREATED_ORDER_STATUS_LOCATOR);
-        return text.getText();
+    public String getCreatedOrderStatus() {
+        Locator text = page.locator(OrderPageLocators.CREATED_ORDER_STATUS_LOCATOR);
+        return text.textContent();
     }
 }

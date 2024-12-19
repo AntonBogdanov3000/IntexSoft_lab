@@ -1,23 +1,21 @@
 package by.intexsoft.tests;
 
 import by.intexsoft.constants.UrlConstants;
-import by.intexsoft.page.MainPage;
-import by.intexsoft.page.OrderPage;
-import org.junit.Test;
+import com.microsoft.playwright.Locator;
 import org.junit.jupiter.api.Assertions;
-
+import org.junit.jupiter.api.Test;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class HeaderTest extends BaseTest{
 
+
     @Test
-    public void testHeaderLogos(){
-        MainPage mainPage = new MainPage(driver);
-        OrderPage orderPage = new OrderPage(driver);
-        orderPage.openPage();
-        orderPage.header.clickOnScooterLogo();
-        Assertions.assertTrue(mainPage.isOpened(), "Actual result is not equals expected");
-        orderPage.header.clickOnYandexLogo();
-        browserUtils.switchTab(driver);
-        Assertions.assertTrue(driver.getCurrentUrl().contains(UrlConstants.YANDEX_URL),"Actual result is not equals expected");
+    public void testHeaderLogos() {
+        page = context.waitForPage(() -> orderPage.header.clickOnYandexLogo());
+        Locator closeButton = page.locator("//span[@tabindex='0']");
+        context.waitForCondition(closeButton::isVisible);
+        closeButton.click();
+        assertThat(closeButton).not().isVisible();
+        Assertions.assertTrue(page.url().contains(UrlConstants.YANDEX_URL));
     }
 }

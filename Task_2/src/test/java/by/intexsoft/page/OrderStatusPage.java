@@ -1,20 +1,18 @@
 package by.intexsoft.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import by.intexsoft.page.locators.OrderStatusPageLocators;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 
 public class OrderStatusPage extends BasePage{
 
-    public OrderStatusPage(WebDriver webDriver) {
-        super(webDriver);
-    }
-    private static final By WRONG_ORDER_PAGE_LOCATOR = By.xpath("//div[contains(@class, 'Track_NotFound')]");
 
-    @Override
+    public OrderStatusPage(Page page) {
+        super(page);
+    }
+
     public boolean isOpened() {
-        WebElement wrongSign = driver.findElement(WRONG_ORDER_PAGE_LOCATOR);
-        return wrongSign.isDisplayed();
+        Locator wrongSign = page.locator(OrderStatusPageLocators.WRONG_ORDER_PAGE_LOCATOR);
+        return wrongSign.isVisible();
     }
 }

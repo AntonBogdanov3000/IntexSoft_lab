@@ -1,16 +1,18 @@
 package by.intexsoft.page;
 
 import by.intexsoft.elements.Header;
-import org.openqa.selenium.WebDriver;
+import com.microsoft.playwright.Page;
 
 public abstract class BasePage {
 
-    protected WebDriver driver;
+
+    public Page page;
     public Header header;
 
-    public BasePage(WebDriver webDriver){
-        this.driver = webDriver;
-        this.header = new Header(webDriver);
+    public BasePage(Page page) {
+        this.page = page;
+        this.header = new Header(page);
     }
-    public abstract boolean isOpened();
+
+   public abstract boolean isOpened();
 }
