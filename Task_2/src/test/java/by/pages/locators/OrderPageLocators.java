@@ -1,4 +1,4 @@
-package by.intexsoft.page.locators;
+package by.pages.locators;
 
 public class OrderPageLocators {
 
@@ -19,4 +19,5 @@ public class OrderPageLocators {
     public final static String CONFIRM_ORDER_BUTTON_LOCATOR = "//div[contains(@class, 'Order_Modal')]/div[2]/button[2]";
     public final static String CREATED_ORDER_STATUS_LOCATOR = "//div[contains(@class, 'Order_ModalHeader')]";
     public final static String METRO_DROPDOWN_LIST_LOCATOR = "//div[contains(@class, 'Order_Text')]";
+
 }

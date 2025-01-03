@@ -1,6 +1,7 @@
-package by.intexsoft.tests;
+package by.tests;
 
-import by.intexsoft.page.OrderStatusPage;
+import by.pages.OrderStatusPage;
+import by.pages.OrderPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -12,8 +13,9 @@ public class OrderTest extends BaseTest {
     @CsvFileSource(resources = "/orderTestData.csv")
     public void testOrder(String name, String surname, String address, String metro, String phone,
                           int dayOfMonth, String period, String color, String expected) {
-        orderPage.openPage();
-        Assertions.assertTrue(orderPage.isOpened());
+        mainPage.open();
+        OrderPage orderPage = mainPage.clickOnOrder();
+        Assertions.assertTrue(orderPage.isOpened().isVisible());
         orderPage.acceptCookies();
         orderPage.enterData(name, surname, address, metro, phone);
         orderPage.clickOnNextButton();
@@ -26,11 +28,12 @@ public class OrderTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/wrongOrderId.csv")
-    public void testCheckUnExistOrder(String orderId){
-        OrderStatusPage orderStatusPage = new OrderStatusPage(page);
-        mainPage.header.clickOnOrderStatusButton();
-        mainPage.header.inputOrderId(orderId);
-        mainPage.header.clickGoButton();
-        Assertions.assertTrue(orderStatusPage.isOpened(), "Result is not equals expected");
+    public void testCheckUnExistOrder(String orderId) {
+        mainPage.open();
+        mainPage.clickOnOrderStatus();
+        mainPage.inputOrderId(orderId);
+        OrderStatusPage orderStatusPage = mainPage.clickOnGo();
+        Assertions.assertTrue(orderStatusPage.orderNotFound().isVisible(), "Result is not equals expected");
     }
+
 }

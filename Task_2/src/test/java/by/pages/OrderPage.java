@@ -1,29 +1,18 @@
-package by.intexsoft.page;
+package by.pages;
 
-import by.intexsoft.page.locators.OrderPageLocators;
+import by.pages.locators.OrderPageLocators;
 import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
 import java.util.List;
 
 public class OrderPage extends BasePage {
 
 
-    public OrderPage(Page page) {
-        super(page);
-    }
-
-    public boolean isOpened() {
-        Locator orderPage = page.locator(OrderPageLocators.ORDER_PAGE_LOCATOR);
-        return orderPage.isVisible();
-    }
-
-    public void openPage() {
-        header.clickOnOrderButton();
+    public Locator isOpened() {
+        return page.locator(OrderPageLocators.ORDER_PAGE_LOCATOR);
     }
 
     public void acceptCookies() {
-        Locator acceptCookieButton = page.locator(OrderPageLocators.ACCEPT_COOKIES_BUTTON_LOCATOR);
-        acceptCookieButton.click();
+        page.locator(OrderPageLocators.ACCEPT_COOKIES_BUTTON_LOCATOR).click();
     }
 
     public void enterData(String name, String surname, String address, String metro, String phone) {
@@ -94,4 +83,5 @@ public class OrderPage extends BasePage {
         Locator text = page.locator(OrderPageLocators.CREATED_ORDER_STATUS_LOCATOR);
         return text.textContent();
     }
+
 }
