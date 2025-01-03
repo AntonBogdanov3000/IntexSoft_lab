@@ -11,5 +11,4 @@ public class BrowserManager {
         return BrowserFactory.valueOf(config().browser().toUpperCase()).createInstance(playwright);
     }
 
-
 }
