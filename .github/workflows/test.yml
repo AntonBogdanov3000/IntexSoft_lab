@@ -1,14 +1,17 @@
-name: Task_2
+name: CI with Playwright and Maven
 
 on:
   push:
-    branches:
-      -Task_2_Playwright
+    branches: [ Task_2_Playwright ]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Playwright supports Linux, macOS, and Windows
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Java (Maven)
         uses: actions/setup-java@v3
         with:
