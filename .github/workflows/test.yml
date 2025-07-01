@@ -22,5 +22,8 @@ jobs:
       - name: Install Playwright browsers
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
+      - name: Go to the folder
+        run: cd Task_2
+
       - name: Run Maven tests
         run: mvn test
