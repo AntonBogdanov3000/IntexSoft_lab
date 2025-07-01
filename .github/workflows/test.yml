@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest  # Playwright supports Linux, macOS, and Windows
 
     steps:
+
+      - name: Go to the folder
+        run: cd Task_2
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -21,9 +25,6 @@ jobs:
 
       - name: Install Playwright browsers
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
-
-      - name: Go to the folder
-        run: cd Task_2
 
       - name: Run Maven tests
         run: mvn test
