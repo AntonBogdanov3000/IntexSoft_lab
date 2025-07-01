@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches:
+      -main 
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Java (Maven)
+      uses: actions/setup-java@v3
+      with:
+          java-version: '17'  # Use your Java version (11, 17, etc.)
+          distribution: 'temurin'
+          cache: 'maven'
+
+    - name: Install Playwright browsers
+      run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
+
+    - name: Run Maven tests
+      run: mvn test
+  
