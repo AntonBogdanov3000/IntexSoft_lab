@@ -11,7 +11,7 @@ jobs:
     steps:
 
       - name: Go to the folder
-        run: cd Task_2
+        run: la
         
       - name: Checkout code
         uses: actions/checkout@v4
