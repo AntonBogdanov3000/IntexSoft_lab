@@ -34,4 +34,5 @@ jobs:
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
       - name: Run Maven tests
+        working-directory: ./Task_2
         run: mvn test
