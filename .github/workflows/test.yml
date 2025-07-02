@@ -18,6 +18,9 @@ jobs:
 
       - name: Go to the folder
         run: cd Task_2
+
+      - name: Go to the folder
+        run: cd Task_2
         
       - name: Check current folder
         run: pwd
