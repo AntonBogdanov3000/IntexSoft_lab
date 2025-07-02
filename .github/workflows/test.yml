@@ -6,33 +6,25 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Playwright supports Linux, macOS, and Windows
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+         working-directory: ./Task_2
 
     steps:
         
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Check branch
-        run: git branch
-
-      - name: Check files
-        run: ls -la
-
       - name: Set up Java (Maven)
         uses: actions/setup-java@v3
         with:
-          java-version: '17'  # Use your Java version (11, 17, etc.)
+          java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-
-      - name: Go to the folder 
-        run: cd Task_2
-
+          
       - name: Install Playwright browsers
-        working-directory: ./Task_2
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
       - name: Run Maven tests
-        working-directory: ./Task_2
         run: mvn test
