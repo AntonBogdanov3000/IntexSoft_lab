@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest  # Playwright supports Linux, macOS, and Windows
 
     steps:
-
-      - name: Go to the folder
-        run: ls
         
       - name: Checkout code
         uses: actions/checkout@v4
         
       - name: Check branch
         run: git branch
+
+      - name: Go to the folder
+        run: ls
 
       - name: Set up Java (Maven)
         uses: actions/setup-java@v3
