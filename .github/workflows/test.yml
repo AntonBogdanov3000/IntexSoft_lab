@@ -29,11 +29,8 @@ jobs:
       - name: Go to the folder 
         run: cd Task_2
 
-      - name: Verify POM exists
-        working-directory: ./Task_2
-        run: ls -la
-
       - name: Install Playwright browsers
+        working-directory: ./Task_2
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
       - name: Run Maven tests
