@@ -22,6 +22,9 @@ jobs:
       - name: Check current folder
         run: pwd
 
+      - name: Check files
+        run: ls
+
       - name: Set up Java (Maven)
         uses: actions/setup-java@v3
         with:
